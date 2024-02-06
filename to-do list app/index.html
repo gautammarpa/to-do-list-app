@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .todo-container {
+            max-width: 400px;
+            width: 100%;
+            background-color: #930909;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .todo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .todo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .todo-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .todo-item input {
+            margin-right: 10px;
+        }
+
+        .add-todo {
+            display: flex;
+        }
+
+        .add-todo input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        .add-todo button {
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="todo-container">
+    <div class="todo-header">
+        <h2>To-Do List</h2>
+    </div>
+    <ul class="todo-list" id="todo-list">
+        <!-- Tasks will be added here dynamically -->
+    </ul>
+    <div class="add-todo">
+        <input type="text" id="task-input" placeholder="Add a new task...">
+        <button onclick="addTask()">Add</button>
+    </div>
+</div>
+
+<script>
+    function addTask() {
+        var taskInput = document.getElementById('task-input');
+        var taskText = taskInput.value.trim();
+
+        if (taskText !== '') {
+            var todoList = document.getElementById('todo-list');
+            var listItem = document.createElement('li');
+            listItem.className = 'todo-item';
+
+            var checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+
+            var taskLabel = document.createElement('label');
+            taskLabel.textContent = taskText;
+
+            var deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.onclick = function () {
+                listItem.remove();
+            };
+
+            listItem.appendChild(checkbox);
+            listItem.appendChild(taskLabel);
+            listItem.appendChild(deleteButton);
+
+            todoList.appendChild(listItem);
+
+            // Clear the input field
+            taskInput.value = '';
+        }
+    }
+</script>
+
+</body>
+</html>
